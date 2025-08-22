@@ -27,7 +27,7 @@ const portfolio = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			image: image().optional(),
 		}),
 })
 
@@ -41,9 +41,9 @@ const work = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			image: image().optional(),
 		}),
 })
 
 
-export const collections = { blog };
+export const collections = { blog, portfolio, work };

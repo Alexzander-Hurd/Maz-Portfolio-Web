@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import ArtPiece from "../components/ArtPiece.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+const projects = (await getCollection("portfolio")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        {
+          projects.map((project) => (
+            <ArtPiece
+              title={project.data.title}
+              description={project.data.description}
+              image={project.data.image}
+              colour="#46108c"
+            />
+          ))
+        }
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

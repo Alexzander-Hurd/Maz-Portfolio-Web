@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  colour: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+
+<div class="art-piece">
+  <div class="art-piece-image">
+    <img src={image?.src} alt={title} />
+  </div>
+  <div class="art-piece-info" style="background-color: {colour};">
+    <h4>{title}</h4>
+    <p>{description}</p>
+  </div>
+</div>

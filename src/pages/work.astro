@@ -21,7 +21,7 @@ const projects = (await getCollection("work")).sort(
   <body>
     <Header />
     <main>
-      <section>
+      <section class="artworks">
         {
           projects.map((project) => (
             <ArtPiece
@@ -35,5 +35,6 @@ const projects = (await getCollection("work")).sort(
       </section>
     </main>
     <Footer />
+    <script src="../scripts/artinfo.js"></script>
   </body>
 </html>

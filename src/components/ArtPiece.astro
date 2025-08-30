@@ -13,10 +13,13 @@ const { title, description, image, colour } = Astro.props;
 ---
 
 <div class="art-piece">
-  <div class="art-piece-image">
+  <div class="art-piece-image d-block mb-2">
     <img src={image.src} alt={title} />
   </div>
-  <div class="art-piece-info" style={`background-color: ${colour};`}>
+  <div
+    class="art-piece-info d-block mb-2"
+    style={`background-color: ${colour};`}
+  >
     <h4 style="color: white;">{title}</h4>
     <p style="color: white;">{description}</p>
   </div>

@@ -5,8 +5,8 @@
  */
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
+	--accent: #b46ed4;
+		--accent-dark: #6B3FA0;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -35,19 +35,23 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+	background: url('/background.png') repeat; 
+	background-size: 400px; 
+	background-color: #FDF6E3;
 }
 main {
-	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 1em 3em;
+	margin-top: 3em;
+	width: 50%;
+	background-color: #FDF6E3;
 }
 h1,
 h2,
@@ -79,7 +83,7 @@ b {
 	font-weight: 700;
 }
 a {
-	color: var(--accent);
+	color: var(--accent-dark);
 }
 a:hover {
 	color: var(--accent);
@@ -202,4 +206,5 @@ hr {
   z-index: 2;
   transition: opacity 0.3s ease, z-index 0s;
 }
+
 

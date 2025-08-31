@@ -4,16 +4,31 @@ import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header>
-  <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/portfolio">Art</HeaderLink>
-      <HeaderLink href="/work">Work</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
+  <nav class="navbar navbar-expand-lg p-3 rounded-4">
+    <div class="d-flex align-items-center gap-2 me-auto">
+      <h1 style="font-size: 2.5em;"><a href="/">{SITE_TITLE}</a></h1>
     </div>
-    <div class="social-links">
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><HeaderLink href="/">Home</HeaderLink></li>
+        <li class="nav-item"><HeaderLink href="/blog">Blog</HeaderLink></li>
+        <li class="nav-item"><HeaderLink href="/portfolio">Art</HeaderLink></li>
+        <li class="nav-item"><HeaderLink href="/work">Work</HeaderLink></li>
+        <li class="nav-item"><HeaderLink href="/about">About</HeaderLink></li>
+      </ul>
+    </div>
+    <div class="social-links d-none d-lg-flex">
       <a href="https://instagram.com/maz87art" target="_blank">
         <span class="sr-only">Follow me on Instagram</span>
         <svg
@@ -66,7 +81,7 @@ import HeaderLink from "./HeaderLink.astro";
   header {
     margin: 0;
     padding: 0 1em;
-    background: white;
+    background-color: #facbe0;
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
   }
   h2 {

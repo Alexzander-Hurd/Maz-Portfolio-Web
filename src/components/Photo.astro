@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  date: Date;
+  camera: string;
+  lens: string;
+  aperture: string;
+  iso: string;
+  focal: string;
+  shutter: string;
+  image: ImageMetadata;
+  colour: string;
+}
+
+const {
+  title,
+  date,
+  camera,
+  lens,
+  aperture,
+  iso,
+  focal,
+  shutter,
+  image,
+  colour,
+} = Astro.props;
+---
+
+<div class="art-piece">
+  <div class="art-piece-image d-block mb-2">
+    <img src={image.src} />
+  </div>
+  <div
+    class="art-piece-info d-block mb-2"
+    style={`background-color: ${colour};`}
+  >
+    <div class="row fit-text">
+      <p class="py-0 mb-1" style="color: white;">{title}</p>
+      <p class="py-0 mb-1" style="color: white;">{date}</p>
+      <div class="col">
+        <p class="py-0 mb-1" style="color: white;">cam: {camera}</p>
+        <p class="py-0 mb-1" style="color: white;">lens: {lens}</p>
+        <p class="py-0 mb-1" style="color: white;">aperture: f {aperture}</p>
+      </div>
+      <div class="col">
+        <p class="py-0 mb-1" style="color: white;">iso: {iso}</p>
+        <p class="py-0 mb-1" style="color: white;">length: {focal}</p>
+        <p class="py-0 mb-1" style="color: white;">shutter: {shutter}</p>
+      </div>
+    </div>
+  </div>
+</div>

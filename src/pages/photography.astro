@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Photo from "../components/Photo.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+const photos = (await getCollection("photos")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main style="width: 75%;">
+      <section class="artworks">
+        {
+          photos.map((project) => (
+            <Photo
+              title={project.data.title}
+              date={project.data.pubDate}
+              camera={project.data.camera}
+              lens={project.data.lens}
+              iso={project.data.iso}
+              focal={project.data.focal}
+              shutter={project.data.shutter}
+              aperture={project.data.aperture}
+              image={project.data.image}
+              colour="#46108c"
+            />
+          ))
+        }
+      </section>
+    </main>
+    <Footer />
+    <script src="../scripts/artinfo.js"></script>
+  </body>
+</html>

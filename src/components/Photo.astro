@@ -38,17 +38,27 @@ const {
     style={`background-color: ${colour};`}
   >
     <div class="row fit-text">
-      <p class="py-0 mb-1" style="color: white;">{title}</p>
-      <p class="py-0 mb-1" style="color: white;">{date}</p>
+      <p class="py-0 mb-1 fw-bold">{title}</p>
+      <p class="py-0 mb-1">
+        {
+          date.toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        }
+      </p>
       <div class="col">
-        <p class="py-0 mb-1" style="color: white;">cam: {camera}</p>
-        <p class="py-0 mb-1" style="color: white;">lens: {lens}</p>
-        <p class="py-0 mb-1" style="color: white;">aperture: f {aperture}</p>
+        <p class="py-0 mb-1">cam: {camera}</p>
+        <p class="py-0 mb-1">lens: {lens}</p>
+        <p class="py-0 mb-1">aperture: f {aperture}</p>
       </div>
       <div class="col">
-        <p class="py-0 mb-1" style="color: white;">iso: {iso}</p>
-        <p class="py-0 mb-1" style="color: white;">length: {focal}</p>
-        <p class="py-0 mb-1" style="color: white;">shutter: {shutter}</p>
+        <p class="py-0 mb-1">iso: {iso}</p>
+        <p class="py-0 mb-1">length: {focal}</p>
+        <p class="py-0 mb-1">shutter: {shutter}</p>
       </div>
     </div>
   </div>

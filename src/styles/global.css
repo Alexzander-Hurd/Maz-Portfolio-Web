@@ -202,7 +202,7 @@ hr {
 /* Hover state: raise above image */
 .art-piece:hover .art-piece-info,
 .art-piece.active .art-piece-info { /* .active will be added via JS */
-  opacity: 0.7;
+  opacity: 0.85;
   z-index: 2;
   transition: opacity 0.3s ease, z-index 0s;
 }

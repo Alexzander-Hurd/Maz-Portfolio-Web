@@ -26,9 +26,11 @@ const projects = (await getCollection("portfolio")).sort(
           projects.map((project) => (
             <ArtPiece
               title={project.data.title}
+              date={project.data.pubDate}
               description={project.data.description}
+              date={project.data.pubDate}
               image={project.data.image}
-              colour="#46108c"
+              colour="#facbe0"
             />
           ))
         }

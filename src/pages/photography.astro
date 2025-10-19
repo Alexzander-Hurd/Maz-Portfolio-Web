@@ -23,18 +23,18 @@ const photos = (await getCollection("photos")).sort(
     <main style="width: 75%;">
       <section class="artworks">
         {
-          photos.map((project) => (
+          photos.map((photo) => (
             <Photo
-              title={project.data.title}
-              date={project.data.pubDate}
-              camera={project.data.camera}
-              lens={project.data.lens}
-              iso={project.data.iso}
-              focal={project.data.focal}
-              shutter={project.data.shutter}
-              aperture={project.data.aperture}
-              image={project.data.image}
-              colour="#46108c"
+              title={photo.data.title}
+              date={photo.data.pubDate}
+              camera={photo.data.camera}
+              lens={photo.data.lens}
+              iso={photo.data.iso}
+              focal={photo.data.focal}
+              shutter={photo.data.shutter}
+              aperture={photo.data.aperture}
+              image={photo.data.image}
+              colour="#facbe0"
             />
           ))
         }

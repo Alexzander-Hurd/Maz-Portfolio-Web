@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import ArtPiece from "../components/ArtPiece.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import ArtPiece from "../../components/ArtPiece.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const projects = (await getCollection("work")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -21,21 +21,22 @@ const projects = (await getCollection("work")).sort(
   <body>
     <Header />
     <main>
-      <section class="artworks">
+      <section class="artworks fit-text">
         {
           projects.map((project) => (
             <ArtPiece
               title={project.data.title}
               date={project.data.pubDate}
               description={project.data.description}
-              image={project.data.image}
+              image={project.data.images[0]}
               colour="#7f7f7f"
+              link={`/work/${project.id}/`}
             />
           ))
         }
       </section>
     </main>
     <Footer />
-    <script src="../scripts/artinfo.js"></script>
+    <script src="../../scripts/artinfo.js"></script>
   </body>
 </html>

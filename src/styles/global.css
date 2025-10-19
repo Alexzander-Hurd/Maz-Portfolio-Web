@@ -213,3 +213,7 @@ hr {
   margin: 0;
   padding: 0;
 }
+
+.carousel-button {
+	filter: invert(1);
+}

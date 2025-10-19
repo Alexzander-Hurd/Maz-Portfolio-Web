@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import ArtPiece from "../components/ArtPiece.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import ArtPiece from "../../components/ArtPiece.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const projects = (await getCollection("portfolio")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -21,7 +21,7 @@ const projects = (await getCollection("portfolio")).sort(
   <body>
     <Header />
     <main style="width: 75%;">
-      <section class="artworks">
+      <section class="artworks fit-text">
         {
           projects.map((project) => (
             <ArtPiece
@@ -29,14 +29,15 @@ const projects = (await getCollection("portfolio")).sort(
               date={project.data.pubDate}
               description={project.data.description}
               date={project.data.pubDate}
-              image={project.data.image}
+              image={project.data.images[0]}
               colour="#facbe0"
+              link={`/portfolio/${project.id}/`}
             />
           ))
         }
       </section>
     </main>
     <Footer />
-    <script src="../scripts/artinfo.js"></script>
+    <script src="../../scripts/artinfo.js"></script>
   </body>
 </html>

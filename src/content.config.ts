@@ -31,7 +31,7 @@ const blog = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			images: z.array(image()).optional(),
 		}),
 });
 
@@ -46,7 +46,7 @@ const portfolio = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			image: image().optional(),
+			images: z.array(image().optional()),
 		}),
 })
 
@@ -60,7 +60,7 @@ const work = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			image: image().optional(),
+			images: z.array(image().optional()),
 		}),
 })
 

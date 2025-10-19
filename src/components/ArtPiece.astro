@@ -8,9 +8,10 @@ interface Props {
   date: Date;
   image: ImageMetadata;
   colour: string;
+  link: string;
 }
 
-const { title, date, description, image, colour } = Astro.props;
+const { title, date, description, image, colour, link } = Astro.props;
 ---
 
 <div class="art-piece">
@@ -32,5 +33,6 @@ const { title, date, description, image, colour } = Astro.props;
       }
     </p>
     <p>{description}</p>
+    <a class="btn btn-primary" href=`${link}`>Read More...</a>
   </div>
 </div>

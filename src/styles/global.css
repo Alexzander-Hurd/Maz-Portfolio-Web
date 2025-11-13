@@ -158,10 +158,6 @@ hr {
 	white-space: nowrap;
 }
 
-.artworks {
-	columns: 3 300px;
-	column-gap: 1em;
-}
 
 .art-piece {
   position: relative;

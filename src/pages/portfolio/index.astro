@@ -1,16 +1,39 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
-import ArtPiece from "../../components/ArtPiece.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
+import ArtPiece from "../../components/ArtPiece.astro";
+import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const projects = (await getCollection("portfolio")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+let columns;
+if (projects.length < 3) {
+  columns = projects.length;
+} else {
+  columns = 3;
+}
+const colClass =
+  columns === 3
+    ? "col-lg-4 col-md-6 col-12"
+    : columns === 2
+      ? "col-md-6 col-12"
+      : "col-12";
+const cols = Array.from({ length: columns }, () => []);
+const heights = Array.from({ length: columns }, () => 0);
+
+// Simple balancing algorithm using image aspect ratio (or fallback)
+projects.forEach((project) => {
+  const image = project.data.images?.[0];
+  const aspectRatio =
+    image?.height && image?.width ? image.height / image.width : 1;
+  const idx = heights.indexOf(Math.min(...heights));
+  cols[idx].push(project);
+  heights[idx] += aspectRatio;
+});
 ---
 
 <!doctype html>
@@ -20,23 +43,28 @@ const projects = (await getCollection("portfolio")).sort(
   </head>
   <body>
     <Header />
-    <main style="width: 75%;">
-      <section class="artworks fit-text">
+
+    <main class="container my-5">
+      <div class="row">
         {
-          projects.map((project) => (
-            <ArtPiece
-              title={project.data.title}
-              date={project.data.pubDate}
-              description={project.data.description}
-              date={project.data.pubDate}
-              image={project.data.images[0]}
-              colour="#facbe0"
-              link={`/portfolio/${project.id}/`}
-            />
+          cols.map((col, colIdx) => (
+            <div class={colClass} key={colIdx}>
+              {col.map((project) => (
+                <ArtPiece
+                  title={project.data.title}
+                  date={project.data.pubDate}
+                  description={project.data.description}
+                  image={project.data.images[0]}
+                  colour="#facbe0"
+                  link={`/work/${project.id}/`}
+                />
+              ))}
+            </div>
           ))
         }
-      </section>
+      </div>
     </main>
+
     <Footer />
     <script src="../../scripts/artinfo.js"></script>
   </body>

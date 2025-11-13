@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 interface Props {
   title: string;
@@ -14,25 +15,28 @@ interface Props {
 const { title, date, description, image, colour, link } = Astro.props;
 ---
 
-<div class="art-piece">
+<article class="art-piece">
   <div class="art-piece-image d-block mb-2">
-    <img src={image.src} alt={title} />
+    <Image src={image} alt={title} loading="lazy" decoding="async" />
   </div>
+
   <div
     class="art-piece-info d-block mb-2"
     style={`background-color: ${colour};`}
   >
-    <h4>{title}</h4>
-    <p>
-      {
-        date.toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })
-      }
-    </p>
-    <p>{description}</p>
-    <a class="btn btn-primary" href=`${link}`>Read More...</a>
+    <div class="fit-text">
+      <h4>{title}</h4>
+      <p>
+        {
+          date.toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        }
+      </p>
+      <p>{description}</p>
+      <a class="btn btn-primary" href={link}>Read More...</a>>
+    </div>
   </div>
-</div>
+</article>

@@ -11,6 +11,25 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 const photos = (await getCollection("photos")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// photography.astro (top of file stays the same)
+const columns = 3;
+
+// Greedy distribution at build time using intrinsic aspect ratio.
+// Add a small fudge factor for the caption/info box so distribution
+// accounts for text height too (tweak `textWeight` as needed).
+const textWeight = 0.25;
+
+const cols = Array.from({ length: columns }, () => []);
+const heights = Array(columns).fill(0);
+
+photos.forEach((photo) => {
+  const img = photo.data.image;
+  const ratio = img.height / img.width + textWeight;
+  const idx = heights.indexOf(Math.min(...heights));
+  cols[idx].push(photo);
+  heights[idx] += ratio;
+});
 ---
 
 <!doctype html>
@@ -20,26 +39,36 @@ const photos = (await getCollection("photos")).sort(
   </head>
   <body>
     <Header />
-    <main style="width: 75%;">
-      <section class="artworks">
+    <main class="container my-5">
+      <div class="row g-4">
         {
-          photos.map((photo) => (
-            <Photo
-              title={photo.data.title}
-              date={photo.data.pubDate}
-              camera={photo.data.camera}
-              lens={photo.data.lens}
-              iso={photo.data.iso}
-              focal={photo.data.focal}
-              shutter={photo.data.shutter}
-              aperture={photo.data.aperture}
-              image={photo.data.image}
-              colour="#facbe0"
-            />
+          cols.map(
+            () => null
+          ) /* keep this line to avoid an unused var warning */
+        }
+        {
+          cols.map((col, colIdx) => (
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex flex-column gap-4">
+              {col.map((photo) => (
+                <Photo
+                  title={photo.data.title}
+                  date={photo.data.pubDate}
+                  camera={photo.data.camera}
+                  lens={photo.data.lens}
+                  iso={photo.data.iso}
+                  focal={photo.data.focal}
+                  shutter={photo.data.shutter}
+                  aperture={photo.data.aperture}
+                  image={photo.data.image}
+                  colour="#facbe0"
+                />
+              ))}
+            </div>
           ))
         }
-      </section>
+      </div>
     </main>
+
     <Footer />
     <script src="../scripts/artinfo.js"></script>
   </body>

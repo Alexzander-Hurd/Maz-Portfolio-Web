@@ -213,3 +213,6 @@ hr {
 .carousel-button {
 	filter: invert(1);
 }
+
+.btn-primary { background-color: #dd85ac; border-color: #dd85ac; color: #000; }
+.btn-primary:hover { background-color: #c93d7c; border-color: #c93d7c; color: #fff; }

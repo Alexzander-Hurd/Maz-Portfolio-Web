@@ -1,24 +1,27 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import ArtPiece from "../components/ArtPiece.astro";
+import Photo from "../components/Photo.astro";
+import FormattedDate from "../components/FormattedDate.astro";
 
-// const posts = (await getCollection("blog"))
-// 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-// 	.slice(0, 3);
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-// const projects = (await getCollection("portfolio"))
-//  	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-// 	.slice(0, 3);
+const projects = (await getCollection("portfolio"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-// const works = (await getCollection("work"))
-// 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-// 	.slice(0, 3);
+const works = (await getCollection("work"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-// const photos = (await getCollection("photos"))
-// 	.slice(0, 10);
+const photos = (await getCollection("photos")).slice(0, 10);
 ---
 
 <!doctype html>
@@ -32,63 +35,234 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
       <img src="/profile.jpg" alt="Marie Rowley" />
       <h1>Welcome to my website!</h1>
       <p>
-        Hi, I'm Marie. I live in Rotherham, UK, andI am an artist, designer, and
-        amateur photographer.
+        Hi, I'm Marie. I live in Rotherham, UK, and I am an artist, designer,
+        and amateur photographer.
       </p>
       <p>
         If you'd like to learn more about me, check out my <a href="/about/"
           >about page</a
         >.
       </p>
-
+      <!-- TODO: Add Carousels for each section and small description + link button -->
       <section>
         <h2>My Work</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {
+            works.length > 0 ? (
+              <div
+                id="workCarousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                data-bs-interval="5000"
+              >
+                <div class="carousel-inner p-5">
+                  {works.map((work, i) => (
+                    <div class={`carousel-item ${i === 0 ? "active" : ""}`}>
+                      <ArtPiece
+                        title={work.data.title}
+                        date={work.data.pubDate}
+                        description={work.data.description}
+                        image={work.data.images[0]}
+                        colour="#facbe0"
+                        link={`/work/${work.id}/`}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div class="carousel-indicators">
+                  {works.map((_, i) => (
+                    <button
+                      type="button"
+                      data-bs-target="#workCarousel"
+                      data-bs-slide-to={i}
+                      class={`carousel-button ${i === 0 ? "active" : ""}`}
+                      aria-label={`Slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p>No blog posts found.</p>
+            )
+          }
+        </div>
+        <div class="mt-4 d-flex justify-content-center">
+          <a href="/work" class="btn btn-primary link-button">See all my work</a
+          >
+        </div>
       </section>
 
       <section>
         <h2>My Art</h2>
-      </section>
+        <div class="grid gap-6 md:grid-cols-2">
+          {
+            projects.length > 0 ? (
+              <div
+                id="projectCarousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                data-bs-interval="5000"
+              >
+                <div class="carousel-inner p-5">
+                  {projects.map((project, i) => (
+                    <div class={`carousel-item ${i === 0 ? "active" : ""}`}>
+                      <ArtPiece
+                        title={project.data.title}
+                        date={project.data.pubDate}
+                        description={project.data.description}
+                        image={project.data.images[0]}
+                        colour="#facbe0"
+                        link={`/work/${project.id}/`}
+                      />
+                    </div>
+                  ))}
+                </div>
 
-      <section>
-        <h2>My Photography</h2>
-      </section>
+                <div class="carousel-indicators">
+                  {projects.map((_, i) => (
+                    <button
+                      type="button"
+                      data-bs-target="#projectCarousel"
+                      data-bs-slide-to={i}
+                      class={`carousel-button ${i === 0 ? "active" : ""}`}
+                      aria-label={`Slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p>No blog posts found.</p>
+            )
+          }
 
-      <section>
-        <h2>My Blog</h2>
-        <!-- {
-          posts.length > 0 ? (
-            <div
-              id="blogCarousel"
-              class="carousel slide"
-              data-bs-ride="carousel"
+          <div class="mt-4 d-flex justify-content-center">
+            <a href="/portfolio" class="btn btn-primary link-button"
+              >See all my artwork</a
             >
-              <div class="carousel-inner p-5">
-                {posts.map((post, i) => (
-                  <div class={`carousel-item ${i === 0 ? "active" : ""}`}>
-                    <BlogCard entry={post} />
-                  </div>
-                ))}
-              </div>
+          </div>
 
-              <div class="carousel-indicators">
-                {posts.map((_, i) => (
-                  <button
-                    style="filter: invert(1);"
-                    type="button"
-                    data-bs-target="#blogCarousel"
-                    data-bs-slide-to={i}
-                    class={i === 0 ? "active" : ""}
-                    aria-label={`Slide ${i + 1}`}
-                  />
-                ))}
+          <section>
+            <h2>My Photography</h2>
+            <div class="grid gap-6 md:grid-cols-2">
+              {
+                photos.length > 0 ? (
+                  <div
+                    id="photoCarousel"
+                    class="carousel slide"
+                    data-bs-ride="carousel"
+                    data-bs-interval="5000"
+                  >
+                    <div class="carousel-inner p-5">
+                      {photos.map((photo, i) => (
+                        <div class={`carousel-item ${i === 0 ? "active" : ""}`}>
+                          <Photo
+                            title={photo.data.title}
+                            date={photo.data.pubDate}
+                            camera={photo.data.camera}
+                            lens={photo.data.lens}
+                            iso={photo.data.iso}
+                            focal={photo.data.focal}
+                            shutter={photo.data.shutter}
+                            aperture={photo.data.aperture}
+                            image={photo.data.image}
+                            colour="#facbe0"
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div class="carousel-indicators">
+                      {photos.map((_, i) => (
+                        <button
+                          type="button"
+                          data-bs-target="#photoCarousel"
+                          data-bs-slide-to={i}
+                          class={`carousel-button ${i === 0 ? "active" : ""}`}
+                          aria-label={`Slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <p>No blog posts found.</p>
+                )
+              }
+
+              <div class="mt-4 d-flex justify-content-center">
+                <a href="/photography" class="btn btn-primary link-button"
+                  >See all my photography</a
+                >
               </div>
+              <section>
+                <h2>My Blog</h2>
+                {
+                  posts.length > 0 ? (
+                    <div
+                      id="blogCarousel"
+                      class="carousel slide"
+                      data-bs-ride="carousel"
+                    >
+                      <div class="carousel-inner p-5">
+                        {posts.map((post, i) => (
+                          <div
+                            class={`carousel-item ${i === 0 ? "active" : ""}`}
+                          >
+                            <a href={`/blog/${post.id}/`}>
+                              {post.data.images && (
+                                <Image
+                                  width={720}
+                                  height={360}
+                                  src={post.data.images[0]}
+                                  alt=""
+                                />
+                              )}
+                              <div class="col">
+                                <div class="row">
+                                  <h4 class="title text-center">
+                                    {post.data.title}
+                                  </h4>
+                                </div>
+                                <div class="row">
+                                  <p class="date text-center">
+                                    <FormattedDate date={post.data.pubDate} />
+                                  </p>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div class="carousel-indicators">
+                        {posts.map((_, i) => (
+                          <button
+                            style="filter: invert(1);"
+                            type="button"
+                            data-bs-target="#blogCarousel"
+                            data-bs-slide-to={i}
+                            class={i === 0 ? "active" : ""}
+                            aria-label={`Slide ${i + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <p>No blog posts found.</p>
+                  )
+                }
+
+                <div class="mt-4 d-flex justify-content-center">
+                  <a href="/blog" class="btn btn-primary link-button"
+                    >See all my blog posts</a
+                  >
+                </div>
+              </section>
+              <Footer />
             </div>
-          ) : (
-            <p>No blog posts found.</p>
-          )
-        } -->
+          </section>
+        </div>
       </section>
-      <Footer />
-    </main>
-  </body>
+    </main></body
+  >
 </html>

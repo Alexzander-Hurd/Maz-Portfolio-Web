@@ -69,7 +69,7 @@ const photos = defineCollection({
 
 		const imagesdir = path.resolve('./src/content/photos');
 		const files = await fs.readdir(imagesdir);
-		const images = files.filter((file) => /\.(jpe?g|png|)$/i.test(file));
+		const images = files.filter((file) => /\.(jpe?g|png|webp)$/i.test(file));
 
 		const metadata = await Promise.all(images.map(async (filename) => {
 			const filepath = path.join(imagesdir, filename);

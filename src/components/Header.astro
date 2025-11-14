@@ -5,8 +5,10 @@ import HeaderLink from "./HeaderLink.astro";
 
 <header>
   <nav class="navbar navbar-expand-lg p-3 rounded-4">
-    <div class="d-flex align-items-center gap-2 me-auto">
-      <h1 style="font-size: 2.5em;"><a href="/">{SITE_TITLE}</a></h1>
+    <div class="d-inline-flex flex-row align-items-center gap-2 me-auto">
+      <a href="/">
+        <img src="/favicon.ico" class="logo" />
+      </a>
     </div>
     <button
       class="navbar-toggler d-lg-none"
@@ -80,6 +82,7 @@ import HeaderLink from "./HeaderLink.astro";
     </div>
   </nav>
 </header>
+
 <style>
   header {
     margin: 0;
@@ -118,6 +121,14 @@ import HeaderLink from "./HeaderLink.astro";
   @media (max-width: 720px) {
     .social-links {
       display: none;
+    }
+  }
+  .logo {
+    max-height: 100px;
+  }
+  @media (max-width: 720px) {
+    .logo {
+      max-height: 80px;
     }
   }
 </style>

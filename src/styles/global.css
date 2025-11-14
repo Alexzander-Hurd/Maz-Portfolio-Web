@@ -150,6 +150,9 @@ hr {
   h4 {
     font-size: 1.563em;
   }
+  .rowcol {
+    flex-direction: column;
+  }
 }
 
 .sr-only {
@@ -235,4 +238,11 @@ hr {
   background-color: #c93d7c;
   border-color: #c93d7c;
   color: #fff;
+}
+
+.rowcol {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

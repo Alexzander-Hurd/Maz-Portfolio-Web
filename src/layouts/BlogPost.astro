@@ -77,10 +77,10 @@ const { title, description, pubDate, updatedDate, images } = Astro.props;
                       <Image
                         src={image}
                         alt={title}
-                        width={720}
-                        height={360}
+                        width={image.width}
+                        height={image.height}
                         class="d-block img-fluid"
-                        style="object-fit: contain; max-height: 360px;"
+                        style="object-fit: contain; max-height: 600px;"
                       />
                     </div>
                   </div>

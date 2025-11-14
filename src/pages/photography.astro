@@ -40,6 +40,59 @@ photos.forEach((photo) => {
   <body>
     <Header />
     <main class="container my-5">
+      <!-- Metadata warning banner (Bootstrap 5) -->
+      <div class="container-fluid">
+        <div
+          class="alert alert-warning d-flex align-items-center justify-content-between mb-0"
+          role="alert"
+          aria-live="polite"
+        >
+          <div class="d-flex align-items-center">
+            <svg
+              class="bi flex-shrink-0 me-2"
+              width="24"
+              height="24"
+              role="img"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use xlink:href="#exclamation-triangle-fill"></use>
+            </svg>
+            <div>
+              <strong>Metadata missing:</strong>
+              Some photos are currently missing camera metadata (EXIF). We’re aware
+              of this and are restoring full metadata as quickly as possible.
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center ms-3">
+            <small class="me-3 text-muted">Thank you for your patience</small>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-dark"
+              data-bs-dismiss="alert"
+              aria-label="Dismiss"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optional: add the SVG symbol in your page (place once, e.g. in the document <body> or a central include) -->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol
+          id="exclamation-triangle-fill"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.964 0L.165 13.233c-.457.778.091 1.767.982 1.767h13.706c.89 0 1.438-.99.982-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1-2.002 0 1 1 0 0 1 2.002 0z"
+          ></path>
+        </symbol>
+      </svg>
+
+      <h2>My Photography</h2>
       <div class="row g-4">
         {
           cols.map(

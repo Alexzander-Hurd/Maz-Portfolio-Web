@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node copy-images.js && astro dev",
+    "build": "node copy-images.js && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -14,6 +14,7 @@
     "@astrojs/sitemap": "^3.5.1",
     "astro": "^5.13.3",
     "exiftool-vendored": "^30.4.0",
+    "fs-extra": "^11.3.2",
     "sharp": "^0.34.2"
   }
 }

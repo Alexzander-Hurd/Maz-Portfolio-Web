@@ -33,7 +33,7 @@ const photos = (await getCollection("photos")).slice(0, 10);
     <Header />
     <main>
       <img src="/profile.jpg" alt="Marie Rowley" />
-      <h1>Welcome to my website!</h1>
+      <h2>Welcome to my website!</h2>
       <p>
         Hi, I'm Marie. I live in Rotherham, UK, and I am an artist, designer,
         and amateur photographer.
@@ -44,7 +44,7 @@ const photos = (await getCollection("photos")).slice(0, 10);
         >.
       </p>
       <section>
-        <h2>My Work</h2>
+        <h3>My Work</h3>
         <div class="grid gap-6 md:grid-cols-2">
           {
             works.length > 0 ? (
@@ -93,7 +93,7 @@ const photos = (await getCollection("photos")).slice(0, 10);
       </section>
 
       <section>
-        <h2>My Art</h2>
+        <h3>My Art</h3>
         <div class="grid gap-6 md:grid-cols-2">
           {
             projects.length > 0 ? (
@@ -142,7 +142,7 @@ const photos = (await getCollection("photos")).slice(0, 10);
           </div>
 
           <section>
-            <h2>My Photography</h2>
+            <h3>My Photography</h3>
             <div class="grid gap-6 md:grid-cols-2">
               {
                 photos.length > 0 ? (
@@ -194,7 +194,7 @@ const photos = (await getCollection("photos")).slice(0, 10);
                 >
               </div>
               <section>
-                <h2>My Blog</h2>
+                <h3>My Blog</h3>
                 {
                   posts.length > 0 ? (
                     <div
